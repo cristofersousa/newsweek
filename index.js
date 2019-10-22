@@ -57,7 +57,7 @@ app.post('/login', async (req, res) => {
   // validando login de acesso
   if(isValid) {
     req.session.user = user;
-    res.redirect('/restrito');
+    res.redirect('/restrito/noticias');
   } else {
     res.redirect('/login');
   }
