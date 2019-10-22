@@ -52,18 +52,20 @@ app.get('/login', (req, res) => {
 
 app.post('/login', async (req, res) => {
   const user = await User.findOne({ username: req.body.username });
-  //const isValid = await user.checkPassword(req.body.password);
-
-  // if(isValid) {
-  //   req.session.user = user;
-  //   res.redirect('/restrito/notica');
-  // } else {
-  //   res.redirect('login/login');
-  // }
-  res.send({
-    user 
-    // isValid
-  });
+  // validando senha se está oka
+  const isValid = await user.checkPassword(req.body.password);
+  // validando login de acesso
+  if(isValid) {
+    req.session.user = user;
+    res.redirect('/restrito');
+  } else {
+    res.redirect('/login');
+  }
+  // checando as informações.
+  // res.send({
+  //   user 
+  //   // isValid
+  // });
 });
 
 mongoose
